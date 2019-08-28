@@ -8,7 +8,7 @@
     <br>
     認識経過：<textarea id="recognizing_text" cols="80" rows="2"></textarea>
     <br>
-    ステータスv2：<span id="status">None</span>
+    ステータスv1：<span id="status">None</span>
     <br>
     <input type="button" id="speech_start" value="音声認識開始">
     <input type="button" id="speech_stop" value="音声認識一時停止">
@@ -26,7 +26,7 @@
             if(!speechIsValid) { return; } // 一時停止フラグが立っていたら抜ける
             var recognition = new webkitSpeechRecognition(); // WebSpeechAPIのインスタンス化
 //            recognition.lang = 'ja'; // 何語で認識するか。この設定でも英語も結構通る
-       recognition.lang = 'cmn-Hans-HK'; // 何語で認識するか。この設定でも英語も結構通る
+       recognition.lang = 'cmn-Hans-CN'; // 何語で認識するか。この設定でも英語も結構通る
             recognition.continuous = true; // マイク使用許可を一回だけにする
             recognition.interimResults = true; // 中間結果を返す
 
