@@ -25,8 +25,8 @@
         function vr_function() {
             if(!speechIsValid) { return; } // 一時停止フラグが立っていたら抜ける
             var recognition = new webkitSpeechRecognition(); // WebSpeechAPIのインスタンス化
-            recognition.lang = 'ja'; // 何語で認識するか。この設定でも英語も結構通る
-//       recognition.lang = 'cmn-Hans-CN'; // 何語で認識するか。この設定でも英語も結構通る
+//            recognition.lang = 'ja'; // 何語で認識するか。この設定でも英語も結構通る
+       recognition.lang = 'cmn-Hans-CN'; // 何語で認識するか。この設定でも英語も結構通る
             recognition.continuous = true; // マイク使用許可を一回だけにする
             recognition.interimResults = true; // 中間結果を返す
 
