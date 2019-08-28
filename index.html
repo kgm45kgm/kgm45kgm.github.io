@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Speech APIのデモ</title>
+</head>
+<body>
+    <textarea id="result_text" cols="100" rows="10"></textarea>
+    <br>
+    認識経過：<textarea id="recognizing_text" cols="80" rows="2"></textarea>
+    <br>
+    ステータス：<span id="status">None</span>
+    <br>
+    <input type="button" id="speech_start" value="音声認識開始">
+    <input type="button" id="speech_stop" value="音声認識一時停止">
+    <hr>
+    <!-- aaa -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/SNAVGsFpaJY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/DHtbmpvxJMc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    -->
+
+    <!-- scriptはbodyの直前で。inputの前にあると -->
+    <script>
+        var speechIsValid = true; // 認識停止フラグ
+    
+        function vr_function() {
+            if(!speechIsValid) { return; } // 一時停止フラグが立っていたら抜ける
+            var recognition = new webkitSpeechRecognition(); // WebSpeechAPIのインスタンス化
+            recognition.lang = 'ja'; // 何語で認識するか。この設定でも英語も結構通る
+            recognition.continuous = true; // マイク使用許可を一回だけにする
+            recognition.interimResults = true; // 中間結果を返す
+
+            // 認識開始
+            change_text('status', 'Ready');
+            recognition.start();
+    
+            // 各種イベントに対する処理
+            recognition.onsoundstart = function() {
+                change_text('status', '認識中');
+            };
+            recognition.onnomatch = function() {
+                change_text('status', 'もう一度試してください');
+            };
+            recognition.onerror = function(event) {
+                change_text('status', 'error:' + event.error);
+                console.log('error:' + event.error);
+                vr_function(); // abortedエラーで頻繁に止まるので再帰
+            };
+            recognition.onsoundend = function() { // これいらないと思う
+                change_text('status', '停止中');
+                vr_function();
+            };
+    
+            // 認識結果の受け取り
+            recognition.onresult = function(event) {
+                // 再帰後もインスタンスが生きててonresultイベントが発生するので認識一時停止時もすぐ関数を抜ける処理を入れる
+                if(!speechIsValid) { return; }
+                // 音声認識の結果は（interimResults == true なら）リアルタイムに認識候補結果を返してくる
+                var results = event.results;
+                for (var i = event.resultIndex; i < results.length; i++) {
+                    if (results[i].isFinal) // resultの最後の要素が最終的な認識結果
+                    {
+                        append_text('result_text', results[i][0].transcript);
+                        change_text('recognizing_text', '');
+                        vr_function(); // 最終結果が確定したあと再帰。新しいインスタンスでstart()しなければならないため。
+                    }
+                    else // 認識途中
+                    {
+                        change_text('recognizing_text', results[i][0].transcript);
+                    }
+                }
+            }
+        }
+
+        /**
+         * 表示部分
+         */
+        //ステータス表示を変える
+        var change_text = function (field_id, str) {
+            document.getElementById(field_id).innerHTML = str;
+        }
+        // 認識結果テキストのアペンド
+        var append_text = function (field_id, str) {
+            document.getElementById(field_id).innerHTML += str;
+        }
+
+        /**
+         * 音声認識開始ボタンのクリックイベント制御
+         */
+        // 音声認識開始
+        document.getElementById('speech_start').onclick = function() {
+            speechIsValid = true;
+            vr_function('speechstart');
+        }
+        // 一時停止
+        document.getElementById('speech_stop').onclick = function() {
+            speechIsValid = false;
+            change_text('status', '音声認識停止中');
+        }
+    </script>
+</body>
+</html>
