@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="ja" >
+<head>
+    <link rel="stylesheet" href="/static/css/font_awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+    
+    <link rel="stylesheet" href="/static/css/main.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/jquery-ui.min.css" type="text/css">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="入力せずに声でテキストを書くのに役立つ無料のオンライン音声認識ツール。音声をテキストに変換するメモ帳。オーディオとビデオファイルを転写します。">
+    <meta name="keywords" content="オンライン音声認識, 音声をテキストに変換する, 音声をテキストに変換する, 口述">
+    <meta name="author" content="Tefrotos">
+    <link rel="canonical" href="/ja/voice-to-text/"/>
+    <title>オンライン音声認識</title>
+    <script type="text/javascript">
+    window.pgjs = window.pgjs || {};
+    pgjs.gdpr = pgjs.gdpr || {};
+    pgjs.publisher = pgjs.publisher || {};
+    pgjs.publisher.name = 'TextFromTospeech';
+    pgjs.publisher.privacyPolicy = 'https://www.textfromtospeech.com/ja/user-agreement/';
+    pgjs.publisherCookieWrap = function(){pgjs.loadJS('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');}
+    </script>
+    <script src="//cdn.pubguru.com/pg.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    
+    
+        
+<nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+<ul class="nav navbar-top-links navbar-right">
+               
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        
+                        <i class="fa fa-user fa-fw"></i>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        
+                        <li>
+                            <a href="/ja/accounts/login/?next=/ja/voice-to-text/">
+                                <i class="fa fa-sign-in fa-fw"></i>
+                                サインイン
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ja/accounts/register/?next=/ja/voice-to-text/">
+                                <i class="fa fa-user-plus fa-fw"></i>
+                                サインアップ
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+            </ul>
+    <ul class="nav navbar-top-links text-center">
+        <li class="dropdown">
+            <a href="/ja/voice-to-text/" tabindex="6">
+                <strong>音声テキスト変換</strong>
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="/ja/text-to-voice/" tabindex="6">
+                テキスト音声変換
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="/ja/transcribe-audio-video/" tabindex="6">
+                音声／ビデオを転写する
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="/ja/contact-us/" tabindex="6">
+                コメント 、ご意見や、ご提案？
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="/ja/user-agreement/" tabindex="6">
+                ユーザー規約
+            </a>
+        </li>
+    </ul>
+
+</nav>
+    
+
+    <div id="page-wrapper">
+        <div class="text-center" style="margin-bottom: 10px;">
+    <!-- TFT_728x90 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-2123155254416555"
+         data-ad-slot="6508305477"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+        <div id="alert" class="alert alert-danger" style="display: none">
+    <a href="#" class="close" onclick="$('#alert').hide()">&times;</a>
+    <span id="alert-text"></span>
+</div>
+
+
+        
+<div class="panel panel-default" style="border: none;-webkit-box-shadow:none;box-shadow:none;" id="text-box-wrapper">
+    <div id="voice-commands-header" class="panel-heading text-center" style="position: relative; border: 1px solid #ddd; border-bottom: none;">
+        <a href="javascript:void(0)" data-toggle="tooltip" title="音声コマンド" id="voice-commands" tabindex="4"><i class="fa fa-2x fa-volume-up"></i></a>
+        <h4 style="font-weight: bold">音声テキスト変換</h4>
+        <i id="microphone" class="fa fa-3x fa-microphone animated" style="display: none"></i>
+        <div class="clearfix" style="margin-bottom: 25px;"></div>
+        <div class="pull-right">
+        <ul class="nav navbar-top-links" style="margin-left: 10px">
+        <li class="dropdown">
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" tabindex="3">
+                        
+
+    
+        <img class="country-flag" src="/static/flags/JA.svg" alt=''>
+    
+
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+            <ul class="dropdown-menu">
+                
+                    
+                        <li style="display: block">
+                            <a href="/en/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/EN.svg" alt=''>
+    
+ English</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/de/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/DE.svg" alt=''>
+    
+ Deutsch</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/es/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/ES.svg" alt=''>
+    
+ Español</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/it/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/IT.svg" alt=''>
+    
+ Italiano</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/fr/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/FR.svg" alt=''>
+    
+ Français</a>
+                        </li>
+                    
+                
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/zh/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/ZH.svg" alt=''>
+    
+ 中文</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/ru/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/RU.svg" alt=''>
+    
+ Русский</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/uk/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/UK.svg" alt=''>
+    
+ Українська</a>
+                        </li>
+                    
+                
+                    
+                        <li style="display: block">
+                            <a href="/ar/voice-to-text/" tabindex="-1">
+
+    
+        <img class="country-flag" src="/static/flags/AR.svg" alt=''>
+    
+ اللغة العربية</a>
+                        </li>
+                    
+                
+            </ul>
+        </li>
+        </ul>
+        </div>
+        <div class="button-controls pull-right">
+            <a tabindex="2" id="zoom-out" href="javascript:void(0)" data-toggle="tooltip" title="ズームアウト"><i class="fa fa-2x fa-search-minus"></i></a>
+            <a tabindex="2" id="zoom-in" href="javascript:void(0)" data-toggle="tooltip" title="ズームイン"><i class="fa fa-2x fa-search-plus"></i></a>
+        </div>
+        <div class="button-controls text-left">
+            <a tabindex="1" id="toggle-dictation" href="javascript:void(0)" data-toggle="tooltip" title="口述を始める" data-title-toggled="口述をやめる"><i class="fa fa-2x fa-play"></i></a>
+            <a tabindex="1" id="clear-content" href="javascript:void(0)" data-toggle="tooltip" title="コンテンツの削除"><i class="fa fa-2x fa-eraser"></i></a>
+            <a tabindex="1" id="save-txt-content" href="javascript:void(0)" data-toggle="tooltip" title=".txtとして保存"><i class="fa fa-2x fa-save"></i></a>
+            <a tabindex="1" id="save-word-content" href="javascript:void(0)" data-toggle="tooltip" title=".docとして保存"><i class="fa fa-2x fa-file-word-o"></i></a>
+            <a tabindex="1" id="copy-content" data-clipboard-target="#text-box" href="javascript:void(0)" data-toggle="tooltip" title="コンテンツのコピー"><i class="fa fa-2x fa-copy"></i></a>
+            <a tabindex="1" id="print-content" href="javascript:void(0)" data-toggle="tooltip" title="コンテンツの印刷"><i class="fa fa-2x fa-print"></i></a>
+            <a tabindex="1" id="send-content" href="javascript:void(0)" data-toggle="tooltip" title="コンテンツの送信"><i class="fa fa-2x fa-envelope"></i></a>
+        </div>
+        <div class="clearfix" style="margin-top: 15px;"></div>
+        <button class="btn btn-info" id='transcribe-button' tabindex="4">音声／ビデオを転写する</button>
+        <div style='margin-top: 15px; display: none'>
+            <audio controls id="audio-control" class="text-left" style="width: 100%;" tabindex="5"></audio>
+            <div class="clearfix"></div>
+            <div style="margin-bottom: 10px; margin-top: 5px;">
+                <div class="col-sm-2 text-left"><label>スピード:</label></div>
+                <div class="col-sm-10"><input id="audio-rate" type="range" step="0.1" min="0.5" max="2" value="0.8" tabindex="5"/></div>
+                <div class="clearfix"></div>
+            </div>
+            <input type="file" id="select-file" style="display: inline-block;" tabindex="5"/>
+        </div>
+    </div>
+    <div class="panel-body" id="text-box-container">
+        <span id="text-box" contenteditable="true" style="border: 1px solid #ddd;" tabindex="5">
+        </span>
+    </div>
+</div>
+<div class="tool-description-container">
+    <h2 class="text-center tool-description-header">音声認識ツール</h2>
+    <div class="tool-description-body">
+        <p>このユーティリティは 音声テキスト変換リーダーです。それはどういう意味ですか。文章を口述するだけで、テキストが書かれるという意味です。</p> <p>このリーダーには次の機能があります：</p> <ul> <li>無料でオンライン</li> <li>ダウンロード、インストールや登録が必要ない。クロスプラットフォーム</li> <li>多言語サポート</li> <li>口述の一時停止または停止が可能（最後の単語位置が保存される）</li> <li>句読点を挿入するための音声コマンド認識。 例えば、「コンマ」を言ったら、「、」が挿入される</li> <li>スマート大文字表記</li> <li>口述したテキストの保存、コピー、印刷または送信が可能</li> </ul>
+    </div>
+    <h2 class="text-center tool-description-header">このツールは誰のため？</h2>
+    <div class="tool-description-body">
+        <p>音声認識ツールは目や背中の問題がある人のために作られたツールです。ソファで横になって、目を休ませながら口述できます。</p> <p>そして、速くタイプできない人や怠けている人にとっても便利です。:)</p>
+        
+    </div>
+    <h2 class="text-center tool-description-header">トラブルシューティング</h2>
+    <div class="tool-description-body">
+        
+        <p>次の問題が発生する可能性があります：</p> <ul> <li>マイクハードウエアの問題</li> <li>ブラウザは音声認識をサポートしない（Chromeの最新バージョンではサポートされている）</li> <li>マイクへのアクセス許可がない</li> <li>ブラウザは違うマイクを使用している</li> </ul> <p>マイクへのアクセス問題を解決するには、ブラウザのアドレスバーにある小さいカメラアイコン（再生ボタンを押した後で現れる）をクリックし、マイク使用を許可して、ドロップダウンリストから正しいマイクを選択してください。</p> <p>他の問題がある場合は、問題を具体的に説明して <a href="/ja/contact-us/">お問い合わせ</a> ください。</p>
+    </div>
+</div>
+<div id="voice-commands-content" style="display: none">
+    <table class="table table-bordered">
+        <tr><th>言う</th><th>表示される</th></tr>
+        
+            <tr><td>終止符</td><td>。</td></tr>
+        
+            <tr><td>コンマ</td><td>、</td></tr>
+        
+            <tr><td>セミコロン</td><td>;</td></tr>
+        
+            <tr><td>コロン</td><td>:</td></tr>
+        
+            <tr><td>ダッシュ, ハイフン</td><td>-</td></tr>
+        
+            <tr><td>疑問符</td><td>？</td></tr>
+        
+            <tr><td>感嘆符</td><td>！</td></tr>
+        
+            <tr><td>開き括弧</td><td>(</td></tr>
+        
+            <tr><td>閉じ括弧</td><td>)</td></tr>
+        
+            <tr><td>改行, エンター</td><td>↵</td></tr>
+        
+            <tr><td>新しい段落</td><td>↵↵</td></tr>
+        
+    </table>
+</div>
+
+    </div>
+</div>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+
+<script src="/static/js/recorder.min.js"></script>
+
+
+    <script src="/static/js/jquery-ui.min.js"></script>
+    <script src="/static/js/clipboard.min.js"></script>
+    <script>
+        var LANGUAGES = {en: 'en-US',de: 'de-DE',es: 'es-ES',it: 'it-IT',fr: 'fr-FR',ja: 'ja-JP',zh: 'zh',ru: 'ru-Ru',uk: 'uk-UA',ar: 'ar-SA'}
+        var SYMBOLS = {
+                
+                    '。': [
+                    
+                        "終止符"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '、': [
+                    
+                        "コンマ"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    ';': [
+                    
+                        "セミコロン"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    ':': [
+                    
+                        "コロン"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '-': [
+                    
+                        "ダッシュ"
+                        
+                            , 
+                            
+                    
+                        "ハイフン"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '？': [
+                    
+                        "疑問符"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '！': [
+                    
+                        "感嘆符"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '(': [
+                    
+                        "開き括弧"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    ')': [
+                    
+                        "閉じ括弧"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '↵': [
+                    
+                        "改行"
+                        
+                            , 
+                            
+                    
+                        "エンター"
+                        
+                                ]
+                        
+                    
+                    , 
+                
+                    '↵↵': [
+                    
+                        "新しい段落"
+                        
+                                ]
+                        
+                    
+                    
+                };
+        var CURRENT_LANGUAGE = 'ja';
+    </script>
+    <script src="/static/js/v2t.min.js?v=2.0"></script>
+    <script>
+        if (typeof writer != 'undefined'){
+            writer.onerror = function(e) {
+            console.log(e.error);
+            var msg = 'エラーが発生しました。ページを再読み込みしてください。';
+            if (e.error === 'no-speech') {
+              msg = '音声が検出されませんでした。マイクをオンにして、もう一度試してください。';
+            } else if (e.error === 'audio-capture') {
+              msg ='マイクがコンピュータに接続され、オンになっていることを確認してください。';
+            } else if (e.error === 'not-allowed') {
+              msg = 'マイクにアクセスできません。 chrome://settings/contentExceptions#media\u002Dstreamに移動し、このWeb サイトにマイクの使用を許可してください。';
+            }
+            if (e.error == 'network'){
+                try{
+                    is_stopped = true;
+                    writer.start();
+                }
+                catch(e){}
+            }
+            else{
+                $('#alert-text').text(msg).parent('#alert').show();
+            }
+
+        };
+        }
+        else{
+            $(function(){$('#alert-text').text('このブラウザバージョンでは音声認識がサポートされていません。更新してください。Chromeの最新バージョンはお勧めです。エディタを使ってテキストを保存できます。').parent('#alert').show()});
+
+        }
+</script>
+
+
+<script type="text/javascript">
+var addthis_config =
+    {
+        ui_tabindex: 10
+    }
+</script>
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5885f5c03bfbf0a9"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-15640261-8', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
